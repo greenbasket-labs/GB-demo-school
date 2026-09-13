@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Sidebar from '@/app/components/Sidebar'
 import {useMemo,useState} from 'react'
 
 const classes=[['JSS 1A','38','Mrs. Ibrahim'],['JSS 2A','41','Mr. Musa'],['JSS 3A','39','Mrs. Okafor'],['SS 1B','36','Mr. Bello'],['SS 2A','34','Mrs. Yusuf'],['SS 3B','31','Mr. Adeyemi']]
@@ -16,4 +17,4 @@ export default function Classes(){
   {selected&&<div className="card" style={{marginTop:20}}><div style={{display:'flex',justifyContent:'space-between',gap:12,alignItems:'center'}}><div><span className="eyebrow">Class selected</span><h3 style={{margin:'4px 0'}}>{selected}</h3><p className="muted">Demo class workspace · Students · Attendance · Results</p></div><button className="btn secondary" onClick={()=>setSelected(null)}>Close</button></div></div>}
  </Page>
 }
-function Page({children}:{children:React.ReactNode}){return <div className="dashboard"><aside className="side"><div className="brand">GB <span style={{color:'#fff'}}>School</span></div>{['Dashboard','Students','Classes','Attendance','Fees & Payments','Results','Reports'].map(x=><Link href={x==='Dashboard'?'/dashboard':`/${x.toLowerCase().replaceAll(' ','-').replace('&-','')}`} key={x}>{x}</Link>)}</aside><main className="main">{children}</main></div>}
+function Page({children}:{children:React.ReactNode}){return <div className="dashboard"><Sidebar/><main className="main">{children}</main></div>}
