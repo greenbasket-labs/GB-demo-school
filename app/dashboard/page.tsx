@@ -15,12 +15,64 @@ const roles = {
 
 type Role = keyof typeof roles
 
+const glance = [
+  ['Attendance recorded','94.2%','Today'],
+  ['Fee collection','69.9%','This session'],
+  ['Results processed','92%','This term']
+]
+
 export default async function Dashboard({searchParams}:{searchParams:Promise<{role?:string}>}) {
   const params = await searchParams
   const role: Role = params.role && params.role in roles ? params.role as Role : 'owner'
   const data = roles[role]
   const links = role === 'cashier' ? common.filter(x=>['Dashboard','Fees & Payments','Reports'].includes(x[0])) : role === 'teacher' ? common.filter(x=>['Dashboard','Classes','Students','Attendance','Results'].includes(x[0])) : role === 'parent' ? common.filter(x=>['Dashboard','Attendance','Fees & Payments','Results'].includes(x[0])) : role === 'student' ? common.filter(x=>['Dashboard','Attendance','Results'].includes(x[0])) : common
-  const roleLinks = links.map(([label,href])=>[label,href === '/dashboard' ? `${href}?role=${role}` : `${href}?role=${role}`] as const)
+  const roleLinks = links.map(([label,href])=>[label,`${href}?role=${role}`] as const)
 
-  return <div className="dashboard"><aside className="side"><div className="brand">GB <span style={{color:'#fff'}}>School</span></div><small style={{padding:'0 10px',color:'#8fae9a'}}>DEMO SCHOOL</small><div style={{margin:'14px 10px 10px',padding:'10px 12px',border:'1px solid #294438',borderRadius:10}}><div style={{fontSize:12,color:'#8fae9a'}}>SIGNED IN AS</div><strong style={{color:'#fff',fontSize:13}}>{data.name}</strong></div>{roleLinks.map(([label,href])=><Link href={href} key={label}>{label}</Link>)}<Link href="/login" style={{marginTop:30}}>Switch role</Link></aside><main className="main"><div className="topline"><div><div className="eyebrow">2025/2026 · First Term · {data.eyebrow}</div><h1 style={{margin:'5px 0'}}>Good morning, {data.name}</h1><p className="muted">{data.intro}</p></div><span className="pill">LIVE DEMO</span></div><div className="grid grid4">{data.cards.map(([label,value,sub])=><div className="card" key={label}><span className="muted">{label}</span><div className="stat">{value}</div><small className="muted">{sub}</small></div>)}</div><div className="card" style={{marginTop:18}}><h3>Quick actions</h3><div style={{display:'flex',gap:10,flexWrap:'wrap',marginTop:14}}>{links.slice(1,4).map(([label,href])=><Link className="btn secondary" href={`${href}?role=${role}`} key={label}>{label}</Link>)}</div></div></main></div>
+  return <div className="dashboard">
+    <aside className="side">
+      <div className="brand">GB <span style={{color:'#fff'}}>School</span></div>
+      <small style={{padding:'0 10px',color:'#8fae9a'}}>DEMO SCHOOL</small>
+      <div style={{margin:'14px 10px 10px',padding:'10px 12px',border:'1px solid #294438',borderRadius:10}}>
+        <div style={{fontSize:12,color:'#8fae9a'}}>SIGNED IN AS</div>
+        <strong style={{color:'#fff',fontSize:13}}>{data.name}</strong>
+      </div>
+      {roleLinks.map(([label,href])=><Link href={href} key={label}>{label}</Link>)}
+      <Link href="/login" style={{marginTop:30}}>Switch role</Link>
+    </aside>
+
+    <main className="main">
+      <div className="topline">
+        <div>
+          <div className="eyebrow">2025/2026 · First Term · {data.eyebrow}</div>
+          <h1 style={{margin:'5px 0'}}>Good morning, {data.name}</h1>
+          <p className="muted">{data.intro}</p>
+        </div>
+        <span className="pill">LIVE DEMO</span>
+      </div>
+
+      <div className="grid grid4">
+        {data.cards.map(([label,value,sub])=><div className="card" key={label}><span className="muted">{label}</span><div className="stat">{value}</div><small className="muted">{sub}</small></div>)}
+      </div>
+
+      <div className="section" style={{paddingBottom:0}}>
+        <div style={{marginBottom:14}}>
+          <div className="eyebrow">Today at a glance</div>
+          <h2 style={{margin:'4px 0'}}>School activity</h2>
+        </div>
+        <div className="grid grid3">
+          {glance.map(([label,value,sub])=><div className="card" key={label}><span className="muted">{label}</span><div className="stat">{value}</div><small className="muted">{sub}</small></div>)}
+        </div>
+      </div>
+
+      <div className="card" style={{marginTop:18}}>
+        <div style={{display:'flex',justifyContent:'space-between',gap:12,alignItems:'center',flexWrap:'wrap'}}>
+          <div><h3 style={{margin:'0 0 4px'}}>Quick actions</h3><p className="muted" style={{margin:0}}>Jump straight into the areas used most.</p></div>
+          <Link className="btn secondary" href={`/reports?role=${role}`}>View reports</Link>
+        </div>
+        <div style={{display:'flex',gap:10,flexWrap:'wrap',marginTop:16}}>
+          {links.slice(1,4).map(([label,href])=><Link className="btn secondary" href={`${href}?role=${role}`} key={label}>{label}</Link>)}
+        </div>
+      </div>
+    </main>
+  </div>
 }
