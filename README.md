@@ -27,10 +27,7 @@ Included areas:
 - Marketing landing page
 - Demo role entry
 - Role-specific dashboard views
-- Role-aware navigation
-- Dashboard KPI cards
-- Today-at-a-glance school activity metrics
-- Quick actions and report access
+- Shared active sidebar navigation
 - Students
 - Classes
 - Attendance
