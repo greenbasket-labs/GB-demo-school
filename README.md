@@ -41,6 +41,8 @@ Included areas:
 
 The demo data is intentionally representative rather than connected to a live school database.
 
+The interface uses consistent buttons, form controls, cards, tables, spacing and mobile behavior across the demo.
+
 The sidebar keeps the selected demo role while navigating between modules, so each role sees only the relevant workflow.
 
 ## Development workflow
