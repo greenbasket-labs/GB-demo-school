@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Sidebar from '@/app/components/Sidebar'
 import {useMemo,useState} from 'react'
 
 const rows=[['GBS/25/001','Aisha Bello','JSS 2A','Active'],['GBS/25/002','Daniel Okafor','SS 1B','Active'],['GBS/25/003','Maryam Musa','JSS 3A','Active'],['GBS/25/004','Samuel Adeyemi','SS 2A','Active'],['GBS/25/005','Esther James','SS 3B','Active']]
@@ -33,4 +34,4 @@ export default function Students(){
  </Page>
 }
 
-function Page({title,sub,children}:{title:string,sub:string,children:React.ReactNode}){return <div className="dashboard"><aside className="side"><div className="brand">GB <span style={{color:'#fff'}}>School</span></div>{['Dashboard','Students','Classes','Attendance','Fees & Payments','Results','Reports'].map(x=><Link href={x==='Dashboard'?'/dashboard':`/${x.toLowerCase().replaceAll(' ','-').replace('&-','')}`} key={x}>{x}</Link>)}</aside><main className="main"><div className="topline"><div><div className="eyebrow">Student management</div><h1 style={{margin:'5px 0'}}>{title}</h1><p className="muted">{sub}</p></div><Link className="btn primary" href="/dashboard">Dashboard</Link></div>{children}</main></div>}
+function Page({title,sub,children}:{title:string,sub:string,children:React.ReactNode}){return <div className="dashboard"><Sidebar/><main className="main"><div className="topline"><div><div className="eyebrow">Student management</div><h1 style={{margin:'5px 0'}}>{title}</h1><p className="muted">{sub}</p></div><Link className="btn primary" href="/dashboard">Dashboard</Link></div>{children}</main></div>}
