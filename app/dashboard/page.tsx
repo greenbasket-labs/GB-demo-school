@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Sidebar from '@/app/components/Sidebar'
 
 const common = [
   ['Dashboard','/dashboard'], ['Students','/students'], ['Classes','/classes'],
@@ -26,20 +27,9 @@ export default async function Dashboard({searchParams}:{searchParams:Promise<{ro
   const role: Role = params.role && params.role in roles ? params.role as Role : 'owner'
   const data = roles[role]
   const links = role === 'cashier' ? common.filter(x=>['Dashboard','Fees & Payments','Reports'].includes(x[0])) : role === 'teacher' ? common.filter(x=>['Dashboard','Classes','Students','Attendance','Results'].includes(x[0])) : role === 'parent' ? common.filter(x=>['Dashboard','Attendance','Fees & Payments','Results'].includes(x[0])) : role === 'student' ? common.filter(x=>['Dashboard','Attendance','Results'].includes(x[0])) : common
-  const roleLinks = links.map(([label,href])=>[label,`${href}?role=${role}`] as const)
 
   return <div className="dashboard">
-    <aside className="side">
-      <div className="brand">GB <span style={{color:'#fff'}}>School</span></div>
-      <small style={{padding:'0 10px',color:'#8fae9a'}}>DEMO SCHOOL</small>
-      <div style={{margin:'14px 10px 10px',padding:'10px 12px',border:'1px solid #294438',borderRadius:10}}>
-        <div style={{fontSize:12,color:'#8fae9a'}}>SIGNED IN AS</div>
-        <strong style={{color:'#fff',fontSize:13}}>{data.name}</strong>
-      </div>
-      {roleLinks.map(([label,href])=><Link href={href} key={label}>{label}</Link>)}
-      <Link href="/login" style={{marginTop:30}}>Switch role</Link>
-    </aside>
-
+    <Sidebar />
     <main className="main">
       <div className="topline">
         <div>
