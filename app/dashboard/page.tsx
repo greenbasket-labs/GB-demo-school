@@ -1,15 +1,25 @@
 import Link from 'next/link'
 
-const roleData: Record<string,{name:string;intro:string;cards:[string,string,string][];links:[string,string][]}> = {
-  owner:{name:'Owner / Admin',intro:'Full school management overview.',cards:[['Students','1,248','Active learners'],['Teachers','74','Teaching staff'],['Attendance','94.2%','Today'],['Classes','36','Active classes']],links:[['Fees & Payments','₦18.4m outstanding'],['Results','92% processed'],['Reports','4 ready reports']]},
-  cashier:{name:'Accountant / Cashier',intro:'Keep fees, payments and balances under control.',cards:[['Collected','₦42.7m','This session'],['Outstanding','₦18.4m','Across students'],['Payments','186','This term'],['Receipts','178','Issued']],links:[['Fees & Payments','Open finance'],['Reports','Fee collection']]},
-  teacher:{name:'Teacher',intro:'Manage your classes, attendance and academic records.',cards:[['My Classes','4','Assigned classes'],['Students','148','In my classes'],['Attendance','96.1%','This week'],['Results','88%','Entered']],links:[['Classes','Open my classes'],['Attendance','Mark attendance'],['Results','Enter results']]},
-  parent:{name:'Parent',intro:'See your children’s school progress in one place.',cards:[['Children','2','Enrolled'],['Attendance','95.4%','This term'],['Results','A average','Latest result'],['Fees','₦45,000','Balance']],links:[['Students','View children'],['Results','View results'],['Fees & Payments','View fees']]},
-  student:{name:'Student',intro:'Your school information at a glance.',cards:[['Class','JSS 2A','Current class'],['Attendance','96%','This term'],['Average','82%','Current result'],['Subjects','10','Registered']],links:[['Results','View results'],['Attendance','View attendance'],['Classes','My class']]},
-}
+const common = [
+  ['Dashboard','/dashboard'], ['Students','/students'], ['Classes','/classes'],
+  ['Attendance','/attendance'], ['Fees & Payments','/fees-payments'], ['Results','/results'], ['Reports','/reports']
+]
 
-export default async function Dashboard({searchParams}:{searchParams:Promise<{role?:string}>}){
-  const {role='owner'}=await searchParams
-  const data=roleData[role] ?? roleData.owner
-  return <div className="dashboard"><aside className="side"><div className="brand">GB <span style={{color:'#fff'}}>School</span></div><small style={{padding:'0 10px',color:'#8fae9a'}}>DEMO SCHOOL</small><Link href={`/dashboard?role=${role}`}>Dashboard</Link>{data.links.map(([label])=><Link key={label} href={`/${label.toLowerCase().replaceAll(' ','-').replace('&-','')}`}>{label}</Link>)}{role==='owner'&&<Link href="/reports">Reports</Link>}<Link href="/login" style={{marginTop:30}}>Switch role</Link></aside><main className="main"><div className="topline"><div><div className="eyebrow">2025/2026 · First Term</div><h1 style={{margin:'5px 0'}}>Good morning, {data.name}</h1><p className="muted">{data.intro}</p></div><span className="pill">LIVE DEMO</span></div><div className="grid grid4">{data.cards.map(([label,value,sub])=><div className="card" key={label}><span className="muted">{label}</span><div className="stat">{value}</div><small className="muted">{sub}</small></div>)}</div><div className="grid grid3" style={{marginTop:18}}>{data.links.map(([title,sub])=><div className="card" key={title}><h3>{title}</h3><p className="muted">{sub}</p><Link className="btn secondary" href={`/${title.toLowerCase().replaceAll(' ','-').replace('&-','')}`}>Open</Link></div>)}</div></main></div>
+const roles = {
+  owner: { name:'Owner / Admin', eyebrow:'School management', intro:'Everything your school needs to monitor daily operations.', cards:[['Students','1,248','Active learners'],['Teachers','74','Teaching staff'],['Attendance','94.2%','Today'],['Outstanding','₦18.4m','Fees balance']] },
+  cashier: { name:'Accountant / Cashier', eyebrow:'Finance desk', intro:'Keep fee collection and payment records under control.', cards:[['Collected','₦42.7m','This session'],['Outstanding','₦18.4m','Balance'],['Payments','326','Recorded this term'],['Collection rate','69.9%','Overall']] },
+  teacher: { name:'Teacher', eyebrow:'Teaching workspace', intro:'Focus on your classes, attendance and academic results.', cards:[['My classes','4','Assigned'],['Students','148','Across classes'],['Attendance','96.1%','This week'],['Results','92%','Processed']] },
+  parent: { name:'Parent', eyebrow:'Parent portal', intro:'See your children’s school activity in one place.', cards:[['Children','2','Enrolled'],['Attendance','95.4%','This term'],['Fees','₦80,000','Outstanding'],['Results','4.2 / 5','Average grade']] },
+  student: { name:'Student', eyebrow:'Student portal', intro:'Your classes, attendance and academic progress at a glance.', cards:[['Class','JSS 2A','Current class'],['Subjects','10','This term'],['Attendance','97%','This term'],['Average','82%','Current result']] }
+} as const
+
+type Role = keyof typeof roles
+
+export default async function Dashboard({searchParams}:{searchParams:Promise<{role?:string}>}) {
+  const params = await searchParams
+  const role: Role = params.role && params.role in roles ? params.role as Role : 'owner'
+  const data = roles[role]
+  const links = role === 'cashier' ? common.filter(x=>['Dashboard','Fees & Payments','Reports'].includes(x[0])) : role === 'teacher' ? common.filter(x=>['Dashboard','Classes','Students','Attendance','Results'].includes(x[0])) : role === 'parent' ? common.filter(x=>['Dashboard','Attendance','Fees & Payments','Results'].includes(x[0])) : role === 'student' ? common.filter(x=>['Dashboard','Attendance','Results'].includes(x[0])) : common
+
+  return <div className="dashboard"><aside className="side"><div className="brand">GB <span style={{color:'#fff'}}>School</span></div><small style={{padding:'0 10px',color:'#8fae9a'}}>DEMO SCHOOL</small>{links.map(([label,href])=><Link href={`${href}${href==='/dashboard'?`?role=${role}`:''}`} key={label}>{label}</Link>)}<Link href="/login" style={{marginTop:30}}>Switch role</Link></aside><main className="main"><div className="topline"><div><div className="eyebrow">2025/2026 · First Term · {data.eyebrow}</div><h1 style={{margin:'5px 0'}}>Good morning, {data.name}</h1><p className="muted">{data.intro}</p></div><span className="pill">LIVE DEMO</span></div><div className="grid grid4">{data.cards.map(([label,value,sub])=><div className="card" key={label}><span className="muted">{label}</span><div className="stat">{value}</div><small className="muted">{sub}</small></div>)}</div><div className="card" style={{marginTop:18}}><h3>Quick actions</h3><div style={{display:'flex',gap:10,flexWrap:'wrap',marginTop:14}}>{links.slice(1,4).map(([label,href])=><Link className="btn secondary" href={href} key={label}>{label}</Link>)}</div></div></main></div>
 }
