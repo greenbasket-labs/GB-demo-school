@@ -11,7 +11,7 @@ Visitors can enter directly from the landing page or use the demo access screen.
 ## Demo roles
 
 - **Owner / Admin** — full school operations, setup, users and oversight
-- **Accountant / Cashier** — fees, payments and collections
+- **Accountant / Cashier** — cashier dashboard, student fee lookup, balances, payments, collections and payment history
 - **Teacher** — classes, attendance and results
 - **Parent** — children, fees and academic progress
 - **Student** — subjects, attendance and results
@@ -38,6 +38,7 @@ Included areas:
 - Owner/Admin school settings view
 - Owner/Admin users and roles view
 - Owner/Admin audit history view
+- Cashier dashboard with student search, balances, payment recording, collection methods, outstanding balances and recent payment history
 
 The demo data is intentionally representative rather than connected to a live school database.
 
