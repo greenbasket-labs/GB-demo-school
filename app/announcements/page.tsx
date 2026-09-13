@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 const announcements = [
   { title:'First Term Parent Meeting', date:'13 Sep 2026', audience:'Parents', text:'Parent meeting holds on Friday at 2:00 PM in the school hall. Class teachers will share term progress and next steps.' },
@@ -10,9 +11,13 @@ const announcements = [
 
 export default function Announcements() {
   const [selected, setSelected] = useState<string | null>(null)
+  const router = useRouter()
 
   return <div className="dashboard">
     <main className="main" style={{maxWidth:980,margin:'0 auto',width:'100%'}}>
+      <div style={{marginBottom:18}}>
+        <button className="btn secondary" onClick={() => router.back()}>← Back</button>
+      </div>
       <div className="topline">
         <div>
           <div className="eyebrow">School communication</div>
