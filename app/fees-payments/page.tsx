@@ -1,59 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import Sidebar from '@/app/components/Sidebar'
 import { useMemo, useState } from 'react'
-
-const initialRows = [
-  { invoice:'INV-2026-1042', student:'Aisha Bello', fee:'Tuition', amount:120000, paid:80000 },
-  { invoice:'INV-2026-1043', student:'Daniel Okafor', fee:'Tuition', amount:120000, paid:120000 },
-  { invoice:'INV-2026-1044', student:'Maryam Musa', fee:'Development', amount:30000, paid:15000 },
-  { invoice:'INV-2026-1045', student:'Samuel Adeyemi', fee:'Transport', amount:20000, paid:20000 },
-]
-
-const money = (value:number) => `₦${value.toLocaleString('en-NG')}`
-
-export default function Fees() {
-  const [rows, setRows] = useState(initialRows)
-  const [filter, setFilter] = useState('All')
-  const [saved, setSaved] = useState(false)
-
-  const visible = useMemo(() => filter === 'All' ? rows : rows.filter(r => filter === 'Outstanding' ? r.paid < r.amount : r.paid === r.amount), [rows, filter])
-  const outstanding = rows.reduce((sum, r) => sum + r.amount - r.paid, 0)
-  const collected = rows.reduce((sum, r) => sum + r.paid, 0)
-
-  function recordPayment(invoice:string) {
-    setRows(current => current.map(r => r.invoice === invoice ? { ...r, paid:r.amount } : r))
-    setSaved(false)
-  }
-
-  function save() {
-    setSaved(true)
-    setTimeout(() => setSaved(false), 2200)
-  }
-
-  return <Page>
-    <div className="eyebrow">Finance</div>
-    <h1>Fees & Payments</h1>
-    <p className="muted">Live demo finance register · 2025/2026</p>
-
-    <div className="stats" style={{marginTop:22}}>
-      <div className="card"><strong>{money(collected)}</strong><span>Collected in register</span></div>
-      <div className="card"><strong>{money(outstanding)}</strong><span>Outstanding in register</span></div>
-      <div className="card"><strong>{rows.length}</strong><span>Invoices</span></div>
-    </div>
-
-    <div className="toolbar" style={{marginTop:22,display:'flex',gap:10,alignItems:'center',flexWrap:'wrap'}}>
-      {['All','Outstanding','Paid'].map(option => <button key={option} onClick={() => setFilter(option)} className={filter===option ? 'button' : 'button secondary'}>{option}</button>)}
-      <button onClick={save} className="button" style={{marginLeft:'auto'}}>Save register</button>
-      {saved && <span className="pill">Saved</span>}
-    </div>
-
-    <div className="card" style={{marginTop:16}}>
-      <table className="table"><thead><tr><th>Invoice</th><th>Student</th><th>Fee</th><th>Amount</th><th>Paid</th><th>Balance</th><th></th></tr></thead>
-        <tbody>{visible.map(r => { const balance=r.amount-r.paid; return <tr key={r.invoice}><td>{r.invoice}</td><td>{r.student}</td><td>{r.fee}</td><td>{money(r.amount)}</td><td>{money(r.paid)}</td><td>{money(balance)}</td><td>{balance > 0 && <button className="button secondary" onClick={() => recordPayment(r.invoice)}>Record full payment</button>}</td></tr> })}</tbody>
-      </table>
-    </div>
-  </Page>
-}
-
-function Page({children}:{children:React.ReactNode}){return <div className="dashboard"><aside className="side"><div className="brand">GB <span style={{color:'#fff'}}>School</span></div>{['Dashboard','Students','Classes','Attendance','Fees & Payments','Results','Reports'].map(x=><Link href={x==='Dashboard'?'/dashboard':`/${x.toLowerCase().replaceAll(' ','-').replace('&-','')}`} key={x}>{x}</Link>)}</aside><main className="main">{children}</main></div>}
+const initialRows=[{invoice:'INV-2026-1042',student:'Aisha Bello',fee:'Tuition',amount:120000,paid:80000},{invoice:'INV-2026-1043',student:'Daniel Okafor',fee:'Tuition',amount:120000,paid:120000},{invoice:'INV-2026-1044',student:'Maryam Musa',fee:'Development',amount:30000,paid:15000},{invoice:'INV-2026-1045',student:'Samuel Adeyemi',fee:'Transport',amount:20000,paid:20000}]
+const money=(value:number)=>`₦${value.toLocaleString('en-NG')}`
+export default function Fees(){const [rows,setRows]=useState(initialRows);const [filter,setFilter]=useState('All');const [saved,setSaved]=useState(false);const visible=useMemo(()=>filter==='All'?rows:rows.filter(r=>filter==='Outstanding'?r.paid<r.amount:r.paid===r.amount),[rows,filter]);const outstanding=rows.reduce((sum,r)=>sum+r.amount-r.paid,0);const collected=rows.reduce((sum,r)=>sum+r.paid,0);return <Page><div className="eyebrow">Finance</div><h1>Fees & Payments</h1><p className="muted">Live demo finance register · 2025/2026</p><div className="stats" style={{marginTop:22}}><div className="card"><strong>{money(collected)}</strong><span>Collected in register</span></div><div className="card"><strong>{money(outstanding)}</strong><span>Outstanding in register</span></div><div className="card"><strong>{rows.length}</strong><span>Invoices</span></div></div><div className="toolbar" style={{marginTop:22,display:'flex',gap:10,alignItems:'center',flexWrap:'wrap'}}>{['All','Outstanding','Paid'].map(option=><button key={option} onClick={()=>setFilter(option)} className={filter===option?'button':'button secondary'}>{option}</button>)}<button onClick={()=>{setSaved(true);setTimeout(()=>setSaved(false),2200)}} className="button" style={{marginLeft:'auto'}}>Save register</button>{saved&&<span className="pill">Saved</span>}</div><div className="card" style={{marginTop:16}}><table className="table"><thead><tr><th>Invoice</th><th>Student</th><th>Fee</th><th>Amount</th><th>Paid</th><th>Balance</th><th></th></tr></thead><tbody>{visible.map(r=>{const balance=r.amount-r.paid;return <tr key={r.invoice}><td>{r.invoice}</td><td>{r.student}</td><td>{r.fee}</td><td>{money(r.amount)}</td><td>{money(r.paid)}</td><td>{money(balance)}</td><td>{balance>0&&<button className="button secondary" onClick={()=>setRows(current=>current.map(x=>x.invoice===r.invoice?{...x,paid:x.amount}:x))}>Record full payment</button>}</td></tr>})}</tbody></table></div></Page>}
+function Page({children}:{children:React.ReactNode}){return <div className="dashboard"><Sidebar/><main className="main">{children}</main></div>}
