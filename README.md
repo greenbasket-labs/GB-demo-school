@@ -37,8 +37,7 @@ Included areas:
 - Results
 - Reports
 - Announcements / notifications
-
-Announcements provide a simple school communication view with realistic messages for staff, students and families.
+- Parent portal with child selection and quick links to attendance, results and fees
 
 The sidebar keeps the selected demo role while navigating between modules, so each role sees only the relevant workflow.
 
