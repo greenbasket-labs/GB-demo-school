@@ -6,7 +6,7 @@ A clean, realistic marketing demo for **Green Basket Global's private-school man
 
 Visitors can enter directly from the landing page or use the demo access screen.
 
-**Dashboard → Students → Classes → Attendance → Fees & Payments → Results → Reports**
+**Dashboard → Students → Classes → Attendance → Fees & Payments → Results → Reports → Announcements**
 
 ## Demo roles
 
@@ -36,6 +36,9 @@ Included areas:
 - Fees & Payments
 - Results
 - Reports
+- Announcements / notifications
+
+Announcements provide a simple school communication view with realistic messages for staff, students and families.
 
 The sidebar keeps the selected demo role while navigating between modules, so each role sees only the relevant workflow.
 
