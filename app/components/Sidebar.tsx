@@ -12,13 +12,14 @@ const common = [
   ['Fees & Payments','/fees-payments'],
   ['Results','/results'],
   ['Reports','/reports'],
+  ['Announcements','/announcements'],
 ]
 
 const roleLinks: Record<string, string[]> = {
-  cashier: ['Dashboard','Fees & Payments','Reports'],
-  teacher: ['Dashboard','Classes','Students','Attendance','Results'],
-  parent: ['Dashboard','Attendance','Fees & Payments','Results'],
-  student: ['Dashboard','Attendance','Results'],
+  cashier: ['Dashboard','Fees & Payments','Reports','Announcements'],
+  teacher: ['Dashboard','Classes','Students','Attendance','Results','Announcements'],
+  parent: ['Dashboard','Attendance','Fees & Payments','Results','Announcements'],
+  student: ['Dashboard','Attendance','Results','Announcements'],
 }
 
 export default function Sidebar() {
