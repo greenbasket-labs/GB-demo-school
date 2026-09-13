@@ -1,11 +1,11 @@
 import Link from 'next/link'
 
 const roles = [
-  ['Owner / Admin','School-wide operations and reporting'],
-  ['Accountant / Cashier','Fees, payments and collections'],
-  ['Teacher','Classes, attendance and results'],
-  ['Parent','Children, fees and academic progress'],
-  ['Student','Subjects, attendance and results'],
+  ['Owner / Admin','School-wide operations and reporting','owner'],
+  ['Accountant / Cashier','Fees, payments and collections','cashier'],
+  ['Teacher','Classes, attendance and results','teacher'],
+  ['Parent','Children, fees and academic progress','parent'],
+  ['Student','Subjects, attendance and results','student'],
 ]
 
 const features = [
@@ -56,9 +56,9 @@ export default function Home(){
         <div style={{marginBottom:22}}>
           <div className="eyebrow">One school · multiple roles</div>
           <h2>Test the experience from any role.</h2>
-          <p className="muted">Choose a role and explore its dedicated workflow.</p>
+          <p className="muted">Choose a role and enter its dedicated workflow.</p>
         </div>
-        <div className="grid grid4">{roles.map(([name,desc],i)=><div className="card" key={name}><div className="pill">ROLE {i+1}</div><h3>{name}</h3><p className="muted">{desc}</p></div>)}</div>
+        <div className="grid grid4">{roles.map(([name,desc,value],i)=><Link href={`/dashboard?role=${value}`} className="card" key={name} style={{textDecoration:'none',color:'inherit'}}><div className="pill">ROLE {i+1}</div><h3>{name}</h3><p className="muted">{desc}</p><strong style={{display:'block',marginTop:14}}>Enter as {name} →</strong></Link>)}</div>
         <div style={{marginTop:24}}><Link className="btn primary" href="/login">Start the live demo →</Link></div>
       </section>
     </main>
