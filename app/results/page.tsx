@@ -1,4 +1,46 @@
+'use client'
+
 import Link from 'next/link'
-const rows=[['Aisha Bello','JSS 2A','Mathematics','A','82'],['Daniel Okafor','SS 1B','English','A','79'],['Maryam Musa','JSS 3A','Basic Science','B','71'],['Samuel Adeyemi','SS 2A','Physics','A','85'],['Esther James','SS 3B','Economics','A','88']]
-export default function Results(){return <Page><div className="eyebrow">Academic records</div><h1>Results</h1><p className="muted">First Term · 2025/2026</p><div className="card" style={{marginTop:22}}><table className="table"><thead><tr><th>Student</th><th>Class</th><th>Subject</th><th>Grade</th><th>Total</th></tr></thead><tbody>{rows.map(r=><tr key={r[0]+r[2]}><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td><td><span className="pill">{r[3]}</span></td><td>{r[4]}</td></tr>)}</tbody></table></div></Page>}
+import { useState } from 'react'
+
+const rows=[
+  ['Aisha Bello','JSS 2A','Mathematics','A','82'],
+  ['Daniel Okafor','SS 1B','English','A','79'],
+  ['Maryam Musa','JSS 3A','Basic Science','B','71'],
+  ['Samuel Adeyemi','SS 2A','Physics','A','85'],
+  ['Esther James','SS 3B','Economics','A','88'],
+]
+
+export default function Results(){
+  const [saved,setSaved]=useState(false)
+  const [term,setTerm]=useState('First Term')
+  const [classFilter,setClassFilter]=useState('All Classes')
+  const [subjectFilter,setSubjectFilter]=useState('All Subjects')
+
+  const classes=['All Classes',...Array.from(new Set(rows.map(r=>r[1])))]
+  const subjects=['All Subjects',...Array.from(new Set(rows.map(r=>r[2])))]
+  const filtered=rows.filter(r=>(classFilter==='All Classes'||r[1]===classFilter)&&(subjectFilter==='All Subjects'||r[2]===subjectFilter))
+
+  return <Page>
+    <div className="eyebrow">Academic records</div>
+    <h1>Results</h1>
+    <p className="muted">{term} · 2025/2026</p>
+
+    <div style={{display:'flex',gap:10,flexWrap:'wrap',marginTop:22}}>
+      <select value={term} onChange={e=>{setTerm(e.target.value);setSaved(false)}} className="input"><option>First Term</option><option>Second Term</option><option>Third Term</option></select>
+      <select value={classFilter} onChange={e=>setClassFilter(e.target.value)} className="input">{classes.map(x=><option key={x}>{x}</option>)}</select>
+      <select value={subjectFilter} onChange={e=>setSubjectFilter(e.target.value)} className="input">{subjects.map(x=><option key={x}>{x}</option>)}</select>
+    </div>
+
+    <div className="card" style={{marginTop:18}}>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',gap:12,marginBottom:14}}>
+        <div><strong>{filtered.length} result records</strong><div className="muted" style={{fontSize:13}}>Review academic performance for the selected period.</div></div>
+        <button className="button" onClick={()=>setSaved(true)}>Save results</button>
+      </div>
+      {saved&&<div className="pill" style={{display:'inline-block',marginBottom:12}}>Results saved</div>}
+      <table className="table"><thead><tr><th>Student</th><th>Class</th><th>Subject</th><th>Grade</th><th>Total</th></tr></thead><tbody>{filtered.map(r=><tr key={r[0]+r[2]}><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td><td><span className="pill">{r[3]}</span></td><td>{r[4]}</td></tr>)}</tbody></table>
+    </div>
+  </Page>
+}
+
 function Page({children}:{children:React.ReactNode}){return <div className="dashboard"><aside className="side"><div className="brand">GB <span style={{color:'#fff'}}>School</span></div>{['Dashboard','Students','Classes','Attendance','Fees & Payments','Results','Reports'].map(x=><Link href={x==='Dashboard'?'/dashboard':`/${x.toLowerCase().replaceAll(' ','-').replace('&-','')}`} key={x}>{x}</Link>)}</aside><main className="main">{children}</main></div>}
