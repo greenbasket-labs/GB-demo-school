@@ -30,14 +30,16 @@ Included areas:
 - Role-aware sidebar navigation
 - Shared active sidebar navigation
 - Mobile-friendly navigation drawer
-- Students
-- Classes
+- Students with realistic admission numbers, classes and profiles
+- Classes with realistic class sizes and teachers
 - Attendance
 - Fees & Payments
 - Results
 - Reports
 - Announcements / notifications
 - Parent portal with child selection and quick links to attendance, results and fees
+
+The demo data is intentionally representative rather than connected to a live school database.
 
 The sidebar keeps the selected demo role while navigating between modules, so each role sees only the relevant workflow.
 
