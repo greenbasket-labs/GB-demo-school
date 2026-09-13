@@ -28,6 +28,7 @@ Included areas:
 - Demo role entry
 - Role-specific dashboard views
 - Shared active sidebar navigation
+- Mobile-friendly navigation drawer
 - Students
 - Classes
 - Attendance
