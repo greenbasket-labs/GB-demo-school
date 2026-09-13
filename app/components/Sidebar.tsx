@@ -13,6 +13,12 @@ const common = [
   ['Results','/results'],
   ['Reports','/reports'],
   ['Announcements','/announcements'],
+  ['Staff & Teachers','/staff'],
+  ['Parents','/parents'],
+  ['Subjects & Setup','/subjects'],
+  ['School Settings','/settings'],
+  ['Users & Roles','/users'],
+  ['Audit History','/audit'],
 ]
 
 const roleLinks: Record<string, string[]> = {
