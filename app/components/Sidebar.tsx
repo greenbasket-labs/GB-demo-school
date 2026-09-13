@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 
 const links = [
   ['Dashboard','/dashboard'],
@@ -15,16 +15,13 @@ const links = [
 
 export default function Sidebar() {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const role = searchParams.get('role')
-  const roleQuery = role ? `?role=${role}` : ''
 
   return <aside className="side">
     <div className="brand">GB <span style={{color:'#fff'}}>School</span></div>
     <small style={{padding:'0 10px',color:'#8fae9a'}}>DEMO SCHOOL</small>
     {links.map(([label, href]) => {
       const active = pathname === href
-      return <Link className={active ? 'active' : ''} href={`${href}${roleQuery}`} key={label}>{label}</Link>
+      return <Link className={active ? 'active' : ''} href={href} key={label}>{label}</Link>
     })}
     <Link href="/login" style={{marginTop:30}}>Switch role</Link>
   </aside>
