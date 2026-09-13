@@ -12,9 +12,9 @@ Visitors can enter directly from the landing page or use the demo access screen.
 
 - **Owner / Admin** — full school operations, setup, users and oversight
 - **Accountant / Cashier** — cashier dashboard, student fee lookup, balances, payments, collections and payment history
-- **Teacher** — classes, attendance and results
-- **Parent** — children, fees and academic progress
-- **Student** — subjects, attendance and results
+- **Teacher** — teaching workspace, classes, students, attendance and results
+- **Parent** — linked children only, daily attendance, attendance history, fees, payments, results and announcements
+- **Student** — personal profile, class, daily attendance, attendance history, fees, results and announcements
 
 Role cards on the landing page link directly into the matching demo dashboard.
 
@@ -31,7 +31,6 @@ Included areas:
 - Mobile-friendly navigation drawer
 - Students, classes, attendance, fees, results and reports
 - Announcements / notifications
-- Parent portal
 - Owner/Admin staff and teacher view
 - Owner/Admin parents and guardians view
 - Owner/Admin subjects and academic setup view
@@ -39,6 +38,9 @@ Included areas:
 - Owner/Admin users and roles view
 - Owner/Admin audit history view
 - Cashier dashboard with student search, balances, payment recording, collection methods, outstanding balances and recent payment history
+- Teacher workspace with teaching assignments, class/student overview, attendance and results quick links
+- Parent portal limited to the parent's linked children, with daily attendance and attendance history
+- Student portal limited to the student's own profile, attendance, fees, results and announcements
 
 The demo data is intentionally representative rather than connected to a live school database.
 
