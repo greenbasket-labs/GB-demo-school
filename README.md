@@ -27,6 +27,7 @@ Included areas:
 - Marketing landing page
 - Demo role entry
 - Role-specific dashboard views
+- Role-aware sidebar navigation
 - Shared active sidebar navigation
 - Mobile-friendly navigation drawer
 - Students
@@ -35,6 +36,8 @@ Included areas:
 - Fees & Payments
 - Results
 - Reports
+
+The sidebar keeps the selected demo role while navigating between modules, so each role sees only the relevant workflow.
 
 ## Development workflow
 
