@@ -37,6 +37,7 @@ Included areas:
 - Owner/Admin school settings view
 - Owner/Admin users and roles view
 - Owner/Admin audit history view
+- Owner/Admin applications review view
 - Cashier dashboard with student search, balances, payment recording, collection methods, outstanding balances and recent payment history
 - Teacher workspace with teaching assignments, class/student overview, attendance and results quick links
 - Parent portal limited to the parent's linked children, with daily attendance and attendance history
@@ -47,6 +48,11 @@ Included areas:
 - Opening types for Student Admission, Teacher and Staff
 - Vacancy fields for section, admission class, teacher subjects, qualification, experience, openings, deadline and additional requirements
 - Open/Closed vacancy control, with owner-created openings stored locally in the reference demo
+- Public application form at `/apply` that displays open openings and collects applicant details
+- Pending application records stored locally in the reference demo
+- Owner application review with Pending / Approved / Rejected states
+- Application detail review and decision controls
+- Approved applications are still only decisions in this reference workflow; approval does not automatically create a student, teacher or staff account
 - Clear rule that submitting an application will not create a student, teacher or staff record; approval is the later onboarding trigger
 
 The demo data is intentionally representative rather than connected to a live school database.
