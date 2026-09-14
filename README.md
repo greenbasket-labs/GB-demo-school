@@ -42,7 +42,7 @@ Included areas:
 - Parent portal limited to the parent's linked children, with daily attendance and attendance history
 - Student portal limited to the student's own profile, attendance, fees, results and announcements
 - School Settings grouped into clean expandable sections for school information, academic setup and school sections
-- School Settings fields for school name, logo, motto, address, phone, email, academic session, current term and Nursery/Primary/Junior/Senior section selection
+- School Settings fields with clearly visible controls for school name, logo, motto, address, phone, email, academic session, current term and Nursery/Primary/Junior/Senior section selection
 
 The demo data is intentionally representative rather than connected to a live school database.
 
