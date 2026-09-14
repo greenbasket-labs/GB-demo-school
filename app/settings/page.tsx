@@ -74,20 +74,20 @@ export default function SettingsPage() {
           <details className="card settings-section" open>
             <summary>School Information <span>Identity and contact details</span></summary>
             <div className="form-grid">
-              <label>School name<input value={settings.schoolName} onChange={(e) => update('schoolName', e.target.value)} /></label>
-              <label>Motto<input value={settings.motto} onChange={(e) => update('motto', e.target.value)} /></label>
-              <label>Address<input value={settings.address} onChange={(e) => update('address', e.target.value)} /></label>
-              <label>Phone<input value={settings.phone} onChange={(e) => update('phone', e.target.value)} /></label>
-              <label>Email<input type="email" value={settings.email} onChange={(e) => update('email', e.target.value)} /></label>
-              <label>School logo<input type="file" accept="image/*" onChange={handleLogo} /></label>
+              <label>School name<input aria-label="School name" value={settings.schoolName} onChange={(e) => update('schoolName', e.target.value)} /></label>
+              <label>Motto<input aria-label="Motto" value={settings.motto} onChange={(e) => update('motto', e.target.value)} /></label>
+              <label>Address<input aria-label="Address" value={settings.address} onChange={(e) => update('address', e.target.value)} /></label>
+              <label>Phone<input aria-label="Phone" value={settings.phone} onChange={(e) => update('phone', e.target.value)} /></label>
+              <label>Email<input aria-label="Email" type="email" value={settings.email} onChange={(e) => update('email', e.target.value)} /></label>
+              <label>School logo<input aria-label="School logo" type="file" accept="image/*" onChange={handleLogo} /></label>
             </div>
           </details>
 
           <details className="card settings-section">
             <summary>Academic Setup <span>Session and current term</span></summary>
             <div className="form-grid">
-              <label>Academic session<select value={settings.session} onChange={(e) => update('session', e.target.value)}><option>2026/2027</option><option>2027/2028</option><option>2028/2029</option></select></label>
-              <label>Current term<select value={settings.term} onChange={(e) => update('term', e.target.value)}><option>First Term</option><option>Second Term</option><option>Third Term</option></select></label>
+              <label>Academic session<select aria-label="Academic session" value={settings.session} onChange={(e) => update('session', e.target.value)}><option>2026/2027</option><option>2027/2028</option><option>2028/2029</option></select></label>
+              <label>Current term<select aria-label="Current term" value={settings.term} onChange={(e) => update('term', e.target.value)}><option>First Term</option><option>Second Term</option><option>Third Term</option></select></label>
             </div>
           </details>
 
@@ -96,7 +96,7 @@ export default function SettingsPage() {
             <div className="section-options">
               {sectionOptions.map((section) => (
                 <label className="check-option" key={section}>
-                  <input type="checkbox" checked={settings.sections.includes(section)} onChange={() => toggleSection(section)} />
+                  <input aria-label={section} type="checkbox" checked={settings.sections.includes(section)} onChange={() => toggleSection(section)} />
                   <span>{section}</span>
                 </label>
               ))}
@@ -105,8 +105,8 @@ export default function SettingsPage() {
         </div>
 
         <div className="settings-actions">
-          <button className="btn" onClick={saveSettings}>Save school settings</button>
-          {saved && <span className="save-message">Saved</span>}
+          <button className="btn primary" onClick={saveSettings}>Save school settings</button>
+          {saved && <span className="save-message">Saved successfully</span>}
         </div>
       </main>
     </div>
