@@ -54,6 +54,18 @@ Included areas:
 - Application detail review and decision controls
 - Approved applications are still only decisions in this reference workflow; approval does not automatically create a student, teacher or staff account
 - Clear rule that submitting an application will not create a student, teacher or staff record; approval is the later onboarding trigger
+- Owner delegation workflow for assigning all or selected Owner permissions to another user
+- Full Owner delegation has a mandatory 24-hour security delay before activation; the delegate has zero Owner access during the pending period
+- Partial Owner delegation can be limited to selected permissions and a defined start/end period
+- Owner can revoke pending or active delegations
+- Delegation history records the delegate, scope, permissions, period and status in the reference demo
+- Owner alert requirement is shown for delegation creation, with phone/SMS and email as the intended notification channels; this reference demo does not claim to send real messages
+
+### Owner delegation security rule
+
+A delegated user never becomes the actual Owner. A full Owner delegation must remain pending for at least 24 hours before it can become active. The Owner should receive an immediate phone/SMS and email alert when the delegation is created so an unauthorized request can be revoked before activation.
+
+The current reference implementation stores delegation records in browser `localStorage` under `gb-owner-delegations`. Real server-side authorization, persistent database storage, identity verification, and real SMS/email delivery must be implemented in the production application before this workflow is used for a live school.
 
 The demo data is intentionally representative rather than connected to a live school database.
 
