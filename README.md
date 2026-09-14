@@ -43,6 +43,11 @@ Included areas:
 - Student portal limited to the student's own profile, attendance, fees, results and announcements
 - School Settings grouped into clean expandable sections for school information, academic setup and school sections
 - School Settings fields with clearly visible controls for school name, logo, motto, address, phone, email, academic session, current term and Nursery/Primary/Junior/Senior section selection
+- Admissions & Recruitment owner controls for creating openings and defining applicant requirements
+- Opening types for Student Admission, Teacher and Staff
+- Vacancy fields for section, admission class, teacher subjects, qualification, experience, openings, deadline and additional requirements
+- Open/Closed vacancy control, with owner-created openings stored locally in the reference demo
+- Clear rule that submitting an application will not create a student, teacher or staff record; approval is the later onboarding trigger
 
 The demo data is intentionally representative rather than connected to a live school database.
 
